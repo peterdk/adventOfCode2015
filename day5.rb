@@ -1002,40 +1002,39 @@ wtebigbaythklkbd"
 
 class SantaString
 
-attr_reader :input
+	attr_reader :input
 
-def initialize(input)
-@input = input
-end
+	def initialize(input)
+		@input = input
+	end
 
-def three_vowels
-nice = "aeiou".chars
-@input.chars.count{|c|nice.include?(c)} >= 3
-end
+	def three_vowels
+		nice = "aeiou".chars
+		@input.chars.count{|c|nice.include?(c)} >= 3
+	end
 
-def double_letter
-chars = @input.chars
-if (chars.uniq.count < chars.count)
-	valid = false
-	for i in 0..(chars.count - 1)
-		if (chars[i] == chars[i+1])
-			valid = true
-			break
+	def double_letter
+		chars = @input.chars
+		if (chars.uniq.count < chars.count)
+			valid = false
+			for i in 0..(chars.count - 1)
+				if (chars[i] == chars[i+1])
+					valid = true
+					break
+				end
+			end
+		valid
 		end
 	end
-	valid
-end
 
-end
+	def no_wrong_strings
+		wrong = ["ab", "cd", "pq", "xy"]
+		wrong.count{|w|@input.match(w)} == 0
+	end
 
-def no_wrong_strings
-wrong = ["ab", "cd", "pq", "xy"]
-wrong.count{|w|@input.match(w)} == 0
-end
-
-def nice
-three_vowels && double_letter && no_wrong_strings
-end
+	def nice
+		three_vowels && double_letter && no_wrong_strings
+	end
 end
 
 puts input.split.map{|l|l.strip}.map{|l|SantaString.new(l).nice}.count{|b|b == true}
