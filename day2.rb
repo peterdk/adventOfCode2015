@@ -1001,30 +1001,30 @@ input = "29x13x26
 
 
 class Present
-	attr_reader :length, :width, :height
-	
-	def initialize(dimension_string)
-		@length, @width, @height = dimension_string.strip.split("x").map{|d|d.to_i}
-	end
+    attr_reader :length, :width, :height
+    
+    def initialize(dimension_string)
+        @length, @width, @height = dimension_string.strip.split("x").map{|d|d.to_i}
+    end
 
-	def to_s
-		"#{@length} x #{@width} x #{@height}"
-	end
+    def to_s
+        "#{@length} x #{@width} x #{@height}"
+    end
 
-	def sides
-		[(@length * @width),(@width * @height),(@height * @length)]
-	end
-	
-	def wrapping_paper
-		sides.map{|s|2 * s}.inject(:+) + sides.sort[0]
-	end
+    def sides
+        [(@length * @width),(@width * @height),(@height * @length)]
+    end
+    
+    def wrapping_paper
+        sides.map{|s|2 * s}.inject(:+) + sides.sort[0]
+    end
 
-	def ribbon
-		sorted = [@length, @width, @height].sort
-		wrap_length = sorted[0] + sorted[0] + sorted[1] + sorted[1]
-		bow_length = sorted.inject(:*)
-		wrap_length + bow_length
-	end
+    def ribbon
+        sorted = [@length, @width, @height].sort
+        wrap_length = sorted[0] + sorted[0] + sorted[1] + sorted[1]
+        bow_length = sorted.inject(:*)
+        wrap_length + bow_length
+    end
 end
 
 
