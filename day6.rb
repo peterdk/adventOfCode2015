@@ -301,51 +301,51 @@ toggle 296,687 through 906,775"
 
 class Grid
 
-	def initialize(width, height)
-		@grid = []
-		height.times do |l|
-			line = []
-			width.times do |w|
-				line << false
-			end
-			@grid << line
-		end
-	end
-	
-	def process(instruction)
-		if (instruction.match(/turn on/))
-			type = :on 
-		elsif (instruction.match(/turn off/))
-			type = :off
-		elsif (instruction.match(/toggle/))	
-			type = :toggle 
-		end
-		match = instruction.match(/(\d+),(\d+) through (\d+),(\d+)/)
-		whole, start_x, start_y, end_x, end_y = match.to_a.map{|v|v.to_i}
-		for y in start_y..end_y
-			for x in start_x..end_x
-				if (type == :on)
-					@grid[y][x] = true
-				elsif (type == :off)
-					@grid[y][x] = false
-				elsif(type == :toggle)
-					current = @grid[y][x]
-					@grid[y][x] = !current
-				end
-			end
-		end
-		self
-	end
+    def initialize(width, height)
+        @grid = []
+        height.times do |l|
+            line = []
+            width.times do |w|
+                line << false
+            end
+            @grid << line
+        end
+    end
+    
+    def process(instruction)
+        if (instruction.match(/turn on/))
+            type = :on 
+        elsif (instruction.match(/turn off/))
+            type = :off
+        elsif (instruction.match(/toggle/)) 
+            type = :toggle 
+        end
+        match = instruction.match(/(\d+),(\d+) through (\d+),(\d+)/)
+        whole, start_x, start_y, end_x, end_y = match.to_a.map{|v|v.to_i}
+        for y in start_y..end_y
+            for x in start_x..end_x
+                if (type == :on)
+                    @grid[y][x] = true
+                elsif (type == :off)
+                    @grid[y][x] = false
+                elsif(type == :toggle)
+                    current = @grid[y][x]
+                    @grid[y][x] = !current
+                end
+            end
+        end
+        self
+    end
 
-	def lights_on
-		@grid.map{|r|r.count{|v|v== true}}.inject(:+)
-	end
-	
+    def lights_on
+        @grid.map{|r|r.count{|v|v== true}}.inject(:+)
+    end
+    
 end
 
 grid = Grid.new(1000, 1000)
 input.lines.each do |l|
-	grid.process(l.strip)
+    grid.process(l.strip)
 end
 puts grid.lights_on
 

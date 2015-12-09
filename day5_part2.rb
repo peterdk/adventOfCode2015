@@ -1006,39 +1006,39 @@ class SantaString
 
     def initialize(input)
         @input = input
-		@chars = input.chars
+        @chars = input.chars
     end
 
-	def two_pairs
-		valid = false
-		pairs = []
-		for i in 0...(@chars.length - 1)						
-			pairs << (@chars[i] + @chars[i+1])
-		end
-		if pairs.uniq.count < pairs.count
-			pairs.each do |pair|
-				index = pairs.index(pair)
-				last_index = pairs.rindex(pair)
-				if (index != last_index && (index - last_index).abs >= 2)
-					valid = true
-					break;
-				end
-			end
-		end
-		valid
-	end
-	
-	def letter_repeat
-		valid = false
-		
-		for i in 0..@chars.length - 2
-			if (@chars[i] == @chars[i+2])
-				valid = true
-				break
-			end
-		end
-		valid
-	end
+    def two_pairs
+        valid = false
+        pairs = []
+        for i in 0...(@chars.length - 1)                        
+            pairs << (@chars[i] + @chars[i+1])
+        end
+        if pairs.uniq.count < pairs.count
+            pairs.each do |pair|
+                index = pairs.index(pair)
+                last_index = pairs.rindex(pair)
+                if (index != last_index && (index - last_index).abs >= 2)
+                    valid = true
+                    break;
+                end
+            end
+        end
+        valid
+    end
+    
+    def letter_repeat
+        valid = false
+        
+        for i in 0..@chars.length - 2
+            if (@chars[i] == @chars[i+2])
+                valid = true
+                break
+            end
+        end
+        valid
+    end
 
     def nice
         letter_repeat && two_pairs

@@ -301,53 +301,53 @@ toggle 296,687 through 906,775"
 
 class Grid
 
-	def initialize(width, height)
-		@grid = []
-		height.times do |l|
-			line = []
-			width.times do |w|
-				line << 0
-			end
-			@grid << line
-		end
-	end
-	
-	def process(instruction)
-		if (instruction.match(/turn on/))
-			type = :on 
-		elsif (instruction.match(/turn off/))
-			type = :off
-		elsif (instruction.match(/toggle/))	
-			type = :toggle 
-		end
-		match = instruction.match(/(\d+),(\d+) through (\d+),(\d+)/)
-		whole, start_x, start_y, end_x, end_y = match.to_a.map{|v|v.to_i}
-		for y in start_y..end_y
-			for x in start_x..end_x
-				current = @grid[y][x]
-				if (type == :on)
-					@grid[y][x] = current + 1
-				elsif (type == :off)
-					if (current > 0)
-						@grid[y][x] = current - 1
-					end
-				elsif(type == :toggle)					
-					@grid[y][x] = current + 2
-				end
-			end
-		end
-		self
-	end
+    def initialize(width, height)
+        @grid = []
+        height.times do |l|
+            line = []
+            width.times do |w|
+                line << 0
+            end
+            @grid << line
+        end
+    end
+    
+    def process(instruction)
+        if (instruction.match(/turn on/))
+            type = :on 
+        elsif (instruction.match(/turn off/))
+            type = :off
+        elsif (instruction.match(/toggle/)) 
+            type = :toggle 
+        end
+        match = instruction.match(/(\d+),(\d+) through (\d+),(\d+)/)
+        whole, start_x, start_y, end_x, end_y = match.to_a.map{|v|v.to_i}
+        for y in start_y..end_y
+            for x in start_x..end_x
+                current = @grid[y][x]
+                if (type == :on)
+                    @grid[y][x] = current + 1
+                elsif (type == :off)
+                    if (current > 0)
+                        @grid[y][x] = current - 1
+                    end
+                elsif(type == :toggle)                  
+                    @grid[y][x] = current + 2
+                end
+            end
+        end
+        self
+    end
 
-	def brightness
-		@grid.map{|r|r.inject(:+)}.inject(:+)
-	end
-	
+    def brightness
+        @grid.map{|r|r.inject(:+)}.inject(:+)
+    end
+    
 end
 
 grid = Grid.new(1000, 1000)
 input.lines.each do |l|
-	grid.process(l.strip)
+    grid.process(l.strip)
 end
 puts grid.brightness
 
