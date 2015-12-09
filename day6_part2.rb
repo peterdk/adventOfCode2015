@@ -351,11 +351,11 @@ input.lines.each do |l|
 end
 puts grid.brightness
 
- input = "turn on 0,0 through 0,0"
- puts input
- puts Grid.new(1000, 1000).process(input).brightness
+ # input = "turn on 0,0 through 0,0"
+ # puts input
+ # puts Grid.new(1000, 1000).process(input).brightness
 
-input = "toggle 0,0 through 999,999"
- puts input
- puts Grid.new(1000, 1000).process(input).brightness
+# input = "toggle 0,0 through 999,999"
+ # puts input
+ # puts Grid.new(1000, 1000).process(input).brightness
 
