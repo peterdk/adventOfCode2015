@@ -19,17 +19,17 @@ class Sayer
                     start = i
                 end
         end
-        @current = groups.map{|s|"#{s.count}#{s[0]}"}.join      
+        @current = groups.map{|s|"#{s.count}#{s[0]}"}.join              
+        
     end
+
 end
 
-s = Sayer.new("1113122113");
+s = Sayer.new("1113122113")
 40.times {|i|s.say}
 puts "day 10 part 1: #{s.current.length}"
 10.times {|i|s.say}
 puts "day 10 part 2: #{s.current.length}"
-
-
 
 
 
