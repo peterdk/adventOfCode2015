@@ -87,13 +87,11 @@ class Processor
         #all combinations 100,0,0 : 99,1,0, 98,1,1 98,2,0 98,0,2
         combinations = []
         for i in 0..100
-            for j in 0..100
-                for k in 0..100
-                    for l in 0..100
-                        combinations << [i,j,k,l] if (i + j + k + l== 100)
-                    end
-                end
-            end
+          combinations << []
+        end
+        
+        for i in 0...@ingredients.length
+          combinations = generate_next_round(combinations)
         end
         
         
@@ -117,15 +115,16 @@ class Processor
         puts "Best cookie: #{best_cookie} => #{highscore}"
     end
     
-    # def generate_next_round(current)
-        # new = []
-        # for i in 0..100
-        # for j in 0...current.length
-            # new << current[j] + [i]
-        # end
-        # end
-        # new
-    # end
+    def generate_next_round(current)
+        new_round = []
+         for i in 0..100
+           for j in 0...current.length
+              value =  current[j] + [i]
+              new_round << value if (value.inject(:+) <= 100)
+            end
+         end
+         new_round
+     end
 end
 
 input = "Sugar: capacity 3, durability 0, flavor 0, texture -3, calories 2
